@@ -88,6 +88,15 @@ namespace HarcosProjekt
             }
         }
 
+        public void Gyogyul()
+        {
+            if (this.eletero == 0)
+                Eletero = MaxEletero;
+            else
+                Eletero += 3 + this.szint;
+
+        }
+
         public override string ToString()
         {
             return string.Format("{0} - LVL:{1} - EXP:{2}/{3} - HP:{4}/{5} - DMG:{6}",
