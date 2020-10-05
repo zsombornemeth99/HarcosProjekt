@@ -73,7 +73,22 @@ namespace HarcosProjekt
             }
             while (bekertStatuszSablon != 1 && bekertStatuszSablon != 2 && bekertStatuszSablon != 3);
 
-            Console.WriteLine(bekertHarcosNev + " " + bekertStatuszSablon);
+            harcosLista.Add(new Harcos(bekertHarcosNev, bekertStatuszSablon));
+
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("\nA többi harcos: \n");
+                for (int i = 0; i < harcosLista.Count - 1; i++)
+                {
+                    Console.WriteLine("\t" + (i + 1) + ". " + harcosLista[i]);
+                    Console.WriteLine();
+                }
+                Console.WriteLine("Az Ön harcosa: \n\n\t" + (harcosLista.Count) + ". " + harcosLista[harcosLista.Count - 1]);
+
+
+            }
+            while (false);
 
 
             Console.ReadKey();
