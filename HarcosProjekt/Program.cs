@@ -10,6 +10,48 @@ namespace HarcosProjekt
 {
     class Program
     {
+        static int menuPont;
+        static int menu()
+        {
+            
+            do
+            {
+                Console.Clear();
+                Console.WriteLine();
+
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                string s = "Harcos Játék";
+                Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
+                Console.WriteLine(s);
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("\n\tMenü");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("\n\t1 - Megküzdeni egy harcossal");
+                Console.WriteLine("\t2 - Gyógyulni");
+                Console.WriteLine("\t3 - Kilépés");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("\n\tKérem válasszon menüpontot: ");
+                Console.ResetColor();
+                try
+                {
+                    while (!int.TryParse(Console.ReadLine(), out menuPont) || menuPont < 1 || menuPont > 6)
+                    {
+
+                        MessageBox.Show("Hiba, nem létező menüpontot választott!");
+                        break;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+            while (menuPont < 1 || menuPont > 6);
+            
+            return menuPont;
+        }
 
         static void Main(string[] args)
         {
@@ -78,14 +120,32 @@ namespace HarcosProjekt
             do
             {
                 Console.Clear();
-                Console.WriteLine("\nA többi harcos: \n");
+                Console.WriteLine("A többi harcos: \n");
                 for (int i = 0; i < harcosLista.Count - 1; i++)
                 {
                     Console.WriteLine("\t" + (i + 1) + ". " + harcosLista[i]);
                     Console.WriteLine();
                 }
                 Console.WriteLine("Az Ön harcosa: \n\n\t" + (harcosLista.Count) + ". " + harcosLista[harcosLista.Count - 1]);
+                
+                Console.WriteLine("\nNyomjon egy ENTER-t a menü megjelenítéséhez!");
+                Console.ReadKey();
 
+                int menuPont;
+                do
+                {
+                    menuPont = menu();
+
+                    switch (menuPont)
+                    {
+                        case 1: break;
+                        case 2:break;
+                        case 3:
+                            MessageBox.Show("Köszönjük, hogy részt vett a játékban");
+                            Environment.Exit(0); break;
+                    }
+                }
+                while (menuPont != 6);
 
             }
             while (false);
