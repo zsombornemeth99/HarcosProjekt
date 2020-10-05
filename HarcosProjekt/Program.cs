@@ -13,7 +13,7 @@ namespace HarcosProjekt
         static int menuPont;
         static int menu()
         {
-            
+
             do
             {
                 Console.Clear();
@@ -49,7 +49,7 @@ namespace HarcosProjekt
                 }
             }
             while (menuPont < 1 || menuPont > 6);
-            
+
             return menuPont;
         }
 
@@ -116,7 +116,7 @@ namespace HarcosProjekt
             while (bekertStatuszSablon != 1 && bekertStatuszSablon != 2 && bekertStatuszSablon != 3);
 
             harcosLista.Add(new Harcos(bekertHarcosNev, bekertStatuszSablon));
-
+            int j = 0;
             do
             {
                 Console.Clear();
@@ -127,7 +127,7 @@ namespace HarcosProjekt
                     Console.WriteLine();
                 }
                 Console.WriteLine("Az Ön harcosa: \n\n\t" + (harcosLista.Count) + ". " + harcosLista[harcosLista.Count - 1]);
-                
+
                 Console.WriteLine("\nNyomjon egy ENTER-t a menü megjelenítéséhez!");
                 Console.ReadKey();
 
@@ -138,17 +138,49 @@ namespace HarcosProjekt
 
                     switch (menuPont)
                     {
-                        case 1: break;
-                        case 2:break;
+                        case 1:
+                            int sorszam = 0;
+                            bool beker;
+                            do
+                            {
+                                try
+                                {
+                                    Console.Write("Melyik harcossal szeretne megküzdeni? Írja ide a sorszámát: ");
+                                    beker = int.TryParse(Console.ReadLine(), out sorszam);
+                                    while (!beker)
+                                    {
+                                        MessageBox.Show("Hiba, csak számot adhat meg!");
+                                        Console.SetCursorPosition(0, Console.CursorTop - 1);
+                                        Console.Write(new string(' ', Console.BufferWidth));
+                                        Console.SetCursorPosition(0, Console.CursorTop - 1);
+                                        break;
+                                    }
+                                    if ((sorszam < 1 || sorszam > harcosLista.Count) && beker)
+                                    {
+                                        MessageBox.Show("Hiba! Nem létező sorszámú harcost választott!");
+                                        Console.SetCursorPosition(0, Console.CursorTop - 1);
+                                        Console.Write(new string(' ', Console.BufferWidth));
+                                        Console.SetCursorPosition(0, Console.CursorTop - 1);
+                                    }
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e);
+                                }
+                            }
+                            while (sorszam < 1 || sorszam > harcosLista.Count);
+                            harcosLista[harcosLista.Count - 1].Megkuzd(harcosLista[sorszam - 1]);
+                            break;
+                        case 2: break;
                         case 3:
                             MessageBox.Show("Köszönjük, hogy részt vett a játékban");
                             Environment.Exit(0); break;
                     }
                 }
-                while (menuPont != 6);
-
+                while (menuPont == 3);
+                j++;
             }
-            while (false);
+            while (j < 5);
 
 
             Console.ReadKey();
