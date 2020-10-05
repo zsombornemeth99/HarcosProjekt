@@ -171,7 +171,9 @@ namespace HarcosProjekt
                             while (sorszam < 1 || sorszam > harcosLista.Count);
                             harcosLista[harcosLista.Count - 1].Megkuzd(harcosLista[sorszam - 1]);
                             break;
-                        case 2: break;
+                        case 2:
+                            harcosLista[harcosLista.Count - 1].Gyogyul();
+                            break;
                         case 3:
                             MessageBox.Show("Köszönjük, hogy részt vett a játékban");
                             Environment.Exit(0); break;

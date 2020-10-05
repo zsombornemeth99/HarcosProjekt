@@ -51,7 +51,7 @@ namespace HarcosProjekt
             {
                 if (eletero <= 0)
                     this.tapasztalat = 0;
-                else if (eletero > MaxEletero)
+                else if (eletero >= MaxEletero)
                     eletero = MaxEletero;
                 else if (tapasztalat >= SzintLepeshez)
                 {
@@ -78,7 +78,7 @@ namespace HarcosProjekt
 
         public int MaxEletero
         {
-            get => AlapEletero + szint * 3;
+            get => AlapEletero + (szint * 3);
         }
 
         public void Megkuzd(Harcos masikHarcos)
@@ -111,7 +111,7 @@ namespace HarcosProjekt
             if (this.eletero == 0)
                 Eletero = MaxEletero;
             else
-                Eletero += 3 + this.szint;
+                Eletero += (3 + this.szint);
 
         }
 
