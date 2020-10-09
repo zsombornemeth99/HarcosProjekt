@@ -189,13 +189,20 @@ namespace HarcosProjekt
 
                     harcosLista[harcosLista.Count - 1].Megkuzd(harcosLista[kivelKuzdMeg]);
 
+                    Console.Clear();
+                    Console.WriteLine("Ebben a körben az Ön harcosa küzd meg egy véletlenül kiválasztott harcossal");
+                    Console.WriteLine("\nAz ellenfél: "+ harcosLista[kivelKuzdMeg]);
+
+                    Console.WriteLine("\nA csata után minden harcos gyógyul.");
                     foreach (var item in harcosLista)
                     {
                         item.Gyogyul();
                     }
+                    Console.WriteLine("\nNyomjon egy ENTER-t a menü megjelenítéséhez!");
+                    Console.ReadKey();
                 }
             }
-            while (korSzamlalo < 5);
+            while (menuPont != 3);
 
 
             Console.ReadKey();
