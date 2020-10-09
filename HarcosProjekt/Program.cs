@@ -116,7 +116,7 @@ namespace HarcosProjekt
             while (bekertStatuszSablon != 1 && bekertStatuszSablon != 2 && bekertStatuszSablon != 3);
 
             harcosLista.Add(new Harcos(bekertHarcosNev, bekertStatuszSablon));
-            int j = 0;
+            int korSzamlalo = 0;
             do
             {
                 Console.Clear();
@@ -180,9 +180,22 @@ namespace HarcosProjekt
                     }
                 }
                 while (menuPont == 3);
-                j++;
+                korSzamlalo++;
+                if (korSzamlalo % 3 == 0)
+                {
+                    Random r = new Random();
+
+                    int kivelKuzdMeg = r.Next(harcosLista.Count - 1);
+
+                    harcosLista[harcosLista.Count - 1].Megkuzd(harcosLista[kivelKuzdMeg]);
+
+                    foreach (var item in harcosLista)
+                    {
+                        item.Gyogyul();
+                    }
+                }
             }
-            while (j < 5);
+            while (korSzamlalo < 5);
 
 
             Console.ReadKey();
