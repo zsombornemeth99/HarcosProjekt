@@ -252,7 +252,7 @@ namespace HarcosProjekt
                     Console.ResetColor();
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("\nEbben a körben az Ön harcosa küzd meg egy véletlenül kiválasztott harcossal");
-                    Console.WriteLine("\nAz ellenfél: " + harcosLista[kivelKuzdMeg]);
+                    Console.WriteLine("\nAz ellenfél: \n\n\t" + harcosLista[kivelKuzdMeg]);
 
                     Console.WriteLine("\nA csata után minden harcos gyógyul.");
                     foreach (var item in harcosLista)
