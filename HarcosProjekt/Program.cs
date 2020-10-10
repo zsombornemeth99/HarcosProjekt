@@ -140,7 +140,23 @@ namespace HarcosProjekt
                     else
                         Environment.Exit(0);
                 }
-
+                int hanyHalott = 0;
+                foreach (var item in harcosLista)
+                {
+                    if (item.Eletero <= 0)
+                        hanyHalott++;
+                }
+                if (hanyHalott>=harcosLista.Count-1)
+                {
+                    var yesNO = MessageBox.Show("Szeretne új játékot kezdeni?", "Gratulálunk Ön nyert!", MessageBoxButtons.YesNo);
+                    if (yesNO == DialogResult.Yes)
+                    {
+                        Application.Restart();
+                        Environment.Exit(0);
+                    }
+                    else
+                        Environment.Exit(0);
+                }
                 Console.ReadKey();
 
                 int menuPont;
