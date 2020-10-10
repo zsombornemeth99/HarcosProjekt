@@ -44,13 +44,14 @@ namespace HarcosProjekt
 
         public string Nev { get => nev; set => nev = value; }
         public int Szint { get => szint; set => szint = value; }
-        public int Tapasztalat { get => tapasztalat; set => tapasztalat = value; }
+        public int Tapasztalat{ get => tapasztalat; set => tapasztalat = value; }
+
         public int Eletero
         {
             get => eletero;
             set
             {
-                if (eletero <= 0)
+                if (Eletero <= 0)
                 {
                     this.tapasztalat = 0;
                     this.eletero = 0;
@@ -66,7 +67,6 @@ namespace HarcosProjekt
                     szint++;
                     eletero = MaxEletero;
                 }
-
             }
         }
         public int AlapEletero { get => alapEletero; }
@@ -135,7 +135,7 @@ namespace HarcosProjekt
         public override string ToString()
         {
             return string.Format("{0} - LVL:{1} - EXP:{2}/{3} - HP:{4}/{5} - DMG:{6}",
-                nev, szint, tapasztalat, SzintLepeshez, eletero, MaxEletero, Sebzes);
+                Nev, Szint, Tapasztalat, SzintLepeshez, Eletero, MaxEletero, Sebzes);
         }
     }
 }

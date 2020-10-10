@@ -47,6 +47,7 @@ namespace HarcosProjekt
                 {
                     Console.WriteLine(e);
                 }
+                Console.WriteLine();
             }
             while (menuPont < 1 || menuPont > 6);
 
@@ -83,7 +84,14 @@ namespace HarcosProjekt
                 Console.WriteLine("Hiba: " + ex);
             }
 
-            Console.Write("Kérem adja meg milyen néven szeretné létrehozni harcosát: ");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine();
+            string s = "Harcos Játék";
+            Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
+            Console.WriteLine(s);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("\n\nKérem adja meg milyen néven szeretné létrehozni harcosát: ");
+            Console.ResetColor();
             string bekertHarcosNev = Console.ReadLine();
             int bekertStatuszSablon = 0;
             bool bevitel;
@@ -91,7 +99,9 @@ namespace HarcosProjekt
             {
                 try
                 {
-                    Console.Write("Kérem adja meg milyen státusz sablonnal szeretné létrehozni harcosát(1,2 v. 3): ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write("\n\nKérem adja meg milyen státusz sablonnal szeretné létrehozni harcosát(1,2 v. 3): ");
+                    Console.ResetColor();
                     bevitel = int.TryParse(Console.ReadLine(), out bekertStatuszSablon);
                     while (!bevitel)
                     {
@@ -101,12 +111,17 @@ namespace HarcosProjekt
                     if (bekertStatuszSablon != 1 && bekertStatuszSablon != 2 && bekertStatuszSablon != 3 && bevitel)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Hiba! Az érték 1, 2 vagy 3 lehet csak! Kérem adja meg újra!" +
-                            "\nNyomjon egy ENTER-t a folytatáshoz!");
+                        Console.WriteLine("\n\nHiba! Az érték 1, 2 vagy 3 lehet csak! Kérem adja meg újra!" +
+                            "\n\nNyomjon egy ENTER-t a folytatáshoz!");
                         Console.ResetColor();
                         Console.ReadKey();
                     }
                     Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
+                    Console.WriteLine();
+                    Console.WriteLine(s);
+                    Console.ResetColor();
                 }
                 catch (Exception e)
                 {
@@ -119,15 +134,25 @@ namespace HarcosProjekt
             int korSzamlalo = 0;
             do
             {
-                Console.Clear();               
-                Console.WriteLine("A többi harcos: \n");
+                Console.Clear();
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
+                Console.WriteLine(s);
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("\n\nA többi harcos: \n");
+                Console.ForegroundColor = ConsoleColor.Blue;
                 for (int i = 0; i < harcosLista.Count - 1; i++)
                 {
                     Console.WriteLine("\t" + (i + 1) + ". " + harcosLista[i]);
                     Console.WriteLine();
                 }
-                Console.WriteLine("Az Ön harcosa: \n\n\t" + (harcosLista.Count) + ". " + harcosLista[harcosLista.Count - 1]);
-
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Az Ön harcosa:");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(" \n\t" + (harcosLista.Count) + ". " + harcosLista[harcosLista.Count - 1]);
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("\nNyomjon egy ENTER-t a menü megjelenítéséhez!");
                 if (harcosLista[harcosLista.Count - 1].Eletero <= 0)
                 {
@@ -146,7 +171,7 @@ namespace HarcosProjekt
                     if (item.Eletero <= 0)
                         hanyHalott++;
                 }
-                if (hanyHalott>=harcosLista.Count-1)
+                if (hanyHalott >= harcosLista.Count - 1)
                 {
                     var yesNO = MessageBox.Show("Szeretne új játékot kezdeni?", "Gratulálunk Ön nyert!", MessageBoxButtons.YesNo);
                     if (yesNO == DialogResult.Yes)
@@ -173,7 +198,9 @@ namespace HarcosProjekt
                             {
                                 try
                                 {
-                                    Console.Write("Melyik harcossal szeretne megküzdeni? Írja ide a sorszámát: ");
+                                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                                    Console.Write("\tMelyik harcossal szeretne megküzdeni? Írja ide a sorszámát: ");
+                                    Console.ResetColor();
                                     beker = int.TryParse(Console.ReadLine(), out sorszam);
                                     while (!beker)
                                     {
@@ -218,15 +245,23 @@ namespace HarcosProjekt
                     harcosLista[harcosLista.Count - 1].Megkuzd(harcosLista[kivelKuzdMeg]);
 
                     Console.Clear();
-                    Console.WriteLine("Ebben a körben az Ön harcosa küzd meg egy véletlenül kiválasztott harcossal");
-                    Console.WriteLine("\nAz ellenfél: "+ harcosLista[kivelKuzdMeg]);
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
+                    Console.WriteLine(s);
+                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("\nEbben a körben az Ön harcosa küzd meg egy véletlenül kiválasztott harcossal");
+                    Console.WriteLine("\nAz ellenfél: " + harcosLista[kivelKuzdMeg]);
 
                     Console.WriteLine("\nA csata után minden harcos gyógyul.");
                     foreach (var item in harcosLista)
                     {
                         item.Gyogyul();
                     }
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("\nNyomjon egy ENTER-t a menü megjelenítéséhez!");
+                    Console.ResetColor();
                     Console.ReadKey();
                 }
             }
