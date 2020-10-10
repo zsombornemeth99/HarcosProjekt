@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace HarcosProjekt
 {
@@ -50,17 +51,22 @@ namespace HarcosProjekt
             set
             {
                 if (eletero <= 0)
+                {
                     this.tapasztalat = 0;
+                    this.eletero = 0;
+                }
                 else if (eletero >= MaxEletero)
                     eletero = MaxEletero;
-                else if (tapasztalat >= SzintLepeshez)
+                else
+                    eletero = value;
+
+                if (tapasztalat >= SzintLepeshez)
                 {
                     tapasztalat -= SzintLepeshez;
                     szint++;
                     eletero = MaxEletero;
                 }
-                else
-                    eletero = value;
+
             }
         }
         public int AlapEletero { get => alapEletero; }
@@ -85,24 +91,35 @@ namespace HarcosProjekt
         {
             if (this == masikHarcos)
                 Console.WriteLine("Hiba!");
-            else if (this.eletero == 0 || masikHarcos.eletero == 0)
-                Console.WriteLine("Hiba!");
+            else if (this.eletero == 0)
+            {
+                var yesNO = MessageBox.Show("Szeretne új játékot kezdeni?", "Az Ön harcosa meghalt!", MessageBoxButtons.YesNo);
+                if (yesNO == DialogResult.Yes)
+                {
+                    Application.Restart();
+                    Environment.Exit(0);
+                }
+                else
+                    Environment.Exit(0);
+            }
+            else if (masikHarcos.eletero == 0)
+                MessageBox.Show("A másik harcos halott.");
             else
             {
                 masikHarcos.eletero -= this.Sebzes;
                 if (masikHarcos.eletero > 0)
                 {
-                    this.Eletero -= masikHarcos.Sebzes;
+                    this.eletero -= masikHarcos.Sebzes;
                 }
 
                 if (this.eletero > 0)
-                    this.Tapasztalat += 5;
+                    this.tapasztalat += 5;
                 if (masikHarcos.eletero > 0)
-                    masikHarcos.Tapasztalat += 5;
+                    masikHarcos.tapasztalat += 5;
                 if (this.eletero <= 0)
-                    masikHarcos.Tapasztalat += 10;
+                    masikHarcos.tapasztalat += 10;
                 if (masikHarcos.eletero <= 0)
-                    this.Tapasztalat += 10;
+                    this.tapasztalat += 10;
             }
         }
 

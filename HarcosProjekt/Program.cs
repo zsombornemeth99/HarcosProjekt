@@ -119,7 +119,7 @@ namespace HarcosProjekt
             int korSzamlalo = 0;
             do
             {
-                Console.Clear();
+                Console.Clear();               
                 Console.WriteLine("A többi harcos: \n");
                 for (int i = 0; i < harcosLista.Count - 1; i++)
                 {
@@ -129,6 +129,18 @@ namespace HarcosProjekt
                 Console.WriteLine("Az Ön harcosa: \n\n\t" + (harcosLista.Count) + ". " + harcosLista[harcosLista.Count - 1]);
 
                 Console.WriteLine("\nNyomjon egy ENTER-t a menü megjelenítéséhez!");
+                if (harcosLista[harcosLista.Count - 1].Eletero <= 0)
+                {
+                    var yesNO = MessageBox.Show("Szeretne új játékot kezdeni?", "Az Ön harcosa meghalt!", MessageBoxButtons.YesNo);
+                    if (yesNO == DialogResult.Yes)
+                    {
+                        Application.Restart();
+                        Environment.Exit(0);
+                    }
+                    else
+                        Environment.Exit(0);
+                }
+
                 Console.ReadKey();
 
                 int menuPont;
